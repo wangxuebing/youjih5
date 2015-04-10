@@ -297,11 +297,11 @@ $.extend(PictureView,{
       $("#picture_view").slick("slickPause");
       var currentIndex = $("#picture_view").slick("slickCurrentSlide");
       if(currentIndex == 0){
-        $(".auto_play").addClass('hide');
-        $(".stop_play").addClass('hide');
+        $(".auto_play,.stop_play,.display").addClass('hide');
+        $('.play').removeClass('hide');
       }else{
-        $(".auto_play").removeClass('hide');
-        $(".stop_play").addClass('hide');
+        $(".auto_play,.play").removeClass('hide');
+        $(".stop_play,.display").addClass('hide');
       }
     });
         
