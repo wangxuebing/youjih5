@@ -76,7 +76,7 @@ background-position:50% 50%; background-color:transparent; z-index:2; border:0; 
 .play{background-image:url('../images/index_play.png'); height:70px; background-repeat:no-repeat; background-position:50% 50%; background-size:contain; 
 cursor:pointer; position:relative; z-index:2;}
 .display{background-image:url('../images/index_pause.png'); height:70px; background-repeat:no-repeat; background-position:50% 50%; background-size:contain; 
-cursor:pointer; position:relative; z-index:2; display:none;}
+cursor:pointer; position:relative; z-index:2;}
 .user_head{height:70px; margin-top:10px;}
 .user_head img{max-height:100%; margin:0px auto;}
 .username{text-align:center; color:#fff; font-size:18px; margin-top:10px; line-height:30px;}

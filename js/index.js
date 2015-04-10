@@ -35,16 +35,14 @@ $.extend(PictureView,{
       PictureView.initCss();
       PictureView.preloadImg(1);
       PictureView.transPos(2);
-      
+      PictureView.initEvent();
       $('#picture_view').slick({
         speed: 500,
         autoplaySpeed: timer,
         infinite: false,
         arrows: false,
         mobileFirst: true
-      });
-
-      PictureView.initEvent();
+      });      
     },500);
   },
   getData : function(){
@@ -309,8 +307,6 @@ $.extend(PictureView,{
         
     $(document).bind("keyup",function(e){
       if(e.keyCode == 37 || e.keyCode == 39){
-        $(".auto_play").removeClass('hide');
-        $(".stop_play").addClass('hide');
         document.getElementById("music").pause();
         $('#picture_view').slick("slickPause");
         var currentIndex = $("#picture_view").slick("slickCurrentSlide");
@@ -318,8 +314,8 @@ $.extend(PictureView,{
           $(".auto_play,.stop_play,.display").addClass('hide');
           $('.play').removeClass('hide');
         }else{
-          $(".auto_play").removeClass('hide');
-          $(".stop_play").addClass('hide');
+          $(".auto_play,.play").removeClass('hide');
+          $(".stop_play,.display").addClass('hide');
         }
         if (e.keyCode == 37){
           $('#picture_view').slick("slickPrev");
@@ -373,14 +369,16 @@ $.extend(PictureView,{
       $('#picture_view').slick("slickPlay");
       document.getElementById("music").play();
       $(this).addClass('hide');
-      $(".stop_play").removeClass('hide');
+      $('.play').addClass('hide');
+      $(".stop_play,.display").removeClass('hide');
     });
     
     $(".stop_play").bind("click",function(){
       $(this).addClass('hide');
+      $('.display').addClass('hide');
       $('#picture_view').slick("slickPause");
       document.getElementById("music").pause();
-      $(".auto_play").removeClass('hide');
+      $(".auto_play,.play").removeClass('hide');
     });
     
     $(".display").bind("click",function(){
