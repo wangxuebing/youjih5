@@ -1,15 +1,11 @@
 var PictureView=PictureView||{};
 var PICTURE_VIEW_CONSTANTS = {};
-var timer = 2000;
+var timer = 3000;
 PICTURE_VIEW_CONSTANTS.HOUR_ANGLE = 30;
 PICTURE_VIEW_CONSTANTS.MINUTE_ANGLE = 6;
 PICTURE_VIEW_CONSTANTS.IMG_ITEM_HTML = '<div class="img_warpper width item">'+
                                           '<img src="" data-src="{0}" data-width="{1}" date-height="{2}" id="image_{3}" width="{5}" height="{6}" class="preview_img">'+
                                           '<p class="img_describe">{4}</p>'+
-                                          '<div class="like_discuss">' +
-                                            '<span>{7}点赞</span>' +
-                                            '<span>{8}评论</span>' +
-                                          '</div>' +
                                         '</div>';
 PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML = '<div class="img_warpper width item">'+
                                           '<div class="clock {0}">'+
@@ -18,10 +14,6 @@ PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML = '<div class="img_warpper width item
                                           '</div>'+
                                           '<img src="" data-src="{3}" data-width="{4}" date-height="{5}" id="image_{6}" width="{8}" height="{9}" class="preview_img">'+
                                           '<div class="img_describe">{7}</div>'+
-                                          '<div class="like_discuss">' +
-                                            '<span>{10}点赞</span>' +
-                                            '<span>{11}评论</span>' +
-                                          '</div>' +
                                       '</div>';
 
 PICTURE_VIEW_CONSTANTS.DATE_ITEM_HTML = '<div class="img_date width item">'+
@@ -141,9 +133,7 @@ $.extend(PictureView,{
                 num,
                 img.content,
                 imgWidth,
-                imgHeight,
-                '20',
-                '40'
+                imgHeight
               );
             }else{
               var imgWidth;
@@ -165,9 +155,7 @@ $.extend(PictureView,{
                 num,
                 img.content,
                 imgWidth,
-                imgHeight,
-                '20',
-                '30'
+                imgHeight
               );
             }
           }else{
@@ -187,9 +175,7 @@ $.extend(PictureView,{
               num, 
               img.content, 
               imgWidth, 
-              imgHeight,
-              '20',
-              '50'
+              imgHeight
             );
           }
           num ++;
@@ -329,8 +315,8 @@ $.extend(PictureView,{
         $('#picture_view').slick("slickPause");
         var currentIndex = $("#picture_view").slick("slickCurrentSlide");
         if(currentIndex == 0){
-          $(".auto_play").addClass('hide');
-          $(".stop_play").addClass('hide');
+          $(".auto_play,.stop_play,.display").addClass('hide');
+          $('.play').removeClass('hide');
         }else{
           $(".auto_play").removeClass('hide');
           $(".stop_play").addClass('hide');
@@ -407,12 +393,12 @@ $.extend(PictureView,{
     });
     
     $(".play").bind("click",function(){
-      $(this).hide();
-      $('.display').show();
-      $('#picture_view').slick("slickPlay");
-      document.getElementById("music").play();
+      $(this).addClass('hide');
       $(".auto_play").addClass("hide");
-      $(".stop_play").removeClass("hide");
+      $(".stop_play,.display").removeClass("hide");
+      $('#picture_view').slick("slickPlay");
+      $('#picture_view').slick("slickGoTo",1);
+      document.getElementById("music").play();
     });
     
     if(this.data.banner_info.image == ""){
