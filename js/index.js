@@ -35,14 +35,14 @@ $.extend(PictureView,{
       PictureView.initCss();
       PictureView.preloadImg(1);
       PictureView.transPos(2);
-      PictureView.initEvent();
       $('#picture_view').slick({
         speed: 500,
         autoplaySpeed: timer,
         infinite: false,
         arrows: false,
         mobileFirst: true
-      });      
+      });   
+      PictureView.initEvent(); 
     },500);
   },
   getData : function(){
