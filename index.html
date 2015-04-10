@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <title>我的游记</title>
+  <meta charset='utf-8' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content="width=device-width,user-scalable=no" name="viewport">
+  <meta name=“viewport” content=“width=device-width; initial-scale=1.0”>
+  <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/slick.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/slick-theme.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <script src="js/jquery.js"></script>
+  <script src="js/slick.js"></script>
+  <script src="js/velocity.min.js"></script>
+  <script src="js/index.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    PictureView.getData();
+  });
+  </script>
+</head>
+
+<body>
+  <button class="stop_play hide"></button>
+  <button class="auto_play hide"></button>
+  <audio id="music" src="" controls loop class="hide"></audio>
+  <div class="page_code"></div>
+  <div class="preview hide" id="single_preview">
+    <div class="opacity"></div>
+    <img src=""/>
+  </div>
+  <div class="page_bg" id="page_bg"></div>
+  <div class="page page_width clearfix" id="picture_view">
+    <div class="face item">
+      <div class="face_main">
+        <div class="play"></div>
+        <div class="display"></div>
+        <div class="face_name"></div>
+        <div class="describe clearfix"></div>
+        <div class="user_head">
+          <img src="">
+        </div>
+        <div class="username"></div>
+      </div>
+    </div>
+    <div class="conduct"></div>
+    <div class="end width item">
+      <div class="end_main">
+        <div class="user_head">
+          <img src="">
+        </div>
+        <div class="username"></div>
+        <div class="end_line">
+          <div class="line_center"></div>
+        </div>
+        <div class="end_describe">做生活的导演，从游迹开始</div>
+      </div>
+      <div class="download">
+        <div class="download_left">
+          <p class="mobile_down"><a href="#" class="mobile" id="mobile"></a></p>
+          <p class="weixin_war"><a href="#" class="weixin"></a></p>
+        </div>
+        <div class="download_right"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

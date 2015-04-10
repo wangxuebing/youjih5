@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/*----所有页面都需要引用的公共样式--------*//* CSS Document write by wangxuebing*/
+*{ margin:0px; padding:0px; box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */}
+body,div,p,option,table,ul,ol,li,dd,dt,dr,h1,h2,h3,h4,h5,h6,input{ margin:0px; padding:0px;}
+ul,ol{ list-style:none;}
+img{ border:0px;}
+
+
+/*规定页面字体，默认滚动条*/
+body { font-family:Microsoft YaHei, Arial, Helvetica; font-size: 12px; color: #666; overflow-y:hidden; overflow-x:auto;}
+/*清除浮动*/
+html, body{ margin:0; height:100%; }
+.iconfont{
+  font-family:"iconfont";
+  font-style:normal;
+}
+
+.clear{ padding:0px; margin:0px; height:0px; width:0px; line-height:0px; font-size:0px; clear:both;}
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; 
+}
+/*去掉链接虚线框*/
+a{blr:expression(this.onFocus=this.close());}
+a{blr:expression(this.onFocus=this.blur());}
+a:focus { -moz-outline-style: none; outline: none;}
+a:hover{ text-decoration:none;}
+a{outline: none; text-decoration:none; cursor:pointer;}
+
+/*去掉输入框等在谷歌浏览器中焦点时的waikuang*/
+input{background:#fff;}
+input:focus {outline: none;}
+input,button,select,textarea,div{outline:none; resize:none;}
+button,select,textarea{cursor:pointer;}
+/*解决按钮等行高浏览器兼容*/
+button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner {border:none; padding:0;}
+
+/*---页面版权-------------------------------------------------------------*/
+
+a,area{blr:expression(this.onFocus=this.blur())} /* for IE */
+a:focus{-moz-outline-style: none;} /* for Firefox */ 
+.hide{display:none;}
+
+.page{height:100%;}
+.page_bg{
+    width:100%; height:100%; position:absolute; left:0; top:0;
+    background-size:cover; background-repeat:no-repeat; background-position:50% 50%;
+}
+.audio{width:40px; height:40px; position:fixed; top:20px; right:20px; background-repeat:no-repeat; background-size:contain; 
+background-position:50% 50%; background-color:transparent; z-index:2; border:0; cursor:pointer;
+}
+.audio_play{ background-image:url('../images/audio.png');}
+.audio_dis{ background-image:url('../images/audio2.png');}
+.auto_play{
+  width:40px; height:40px; position:fixed; top:20px; right:20px; border:0; background-image:url('../images/auto_play.png'); cursor:pointer;
+  background-repeat:no-repeat; background-size:contain; background-position:50% 50%; background-color:transparent; z-index:2;
+}
+.stop_play{width:40px; height:40px; position:fixed; top:20px; right:20px; background-repeat:no-repeat; background-size:contain; 
+background-position:50% 50%; background-color:transparent; z-index:2; border:0; cursor:pointer; color:#fff; background-image:url('../images/stop_play.png');}
+.width{float:left; height:100%;}
+.swipe-wrap{height:100%;}
+.face{height:100%; float:left; background-repeat:no-repeat; background-size:cover; position:relative; background-position:50% 50%;}
+.face_name,.describe,.end_describe{color:#fff; line-height:30px; font-size:16px; padding:0px 20px; text-align:center; margin-top:10px;}
+.face_name{font-size:24px;}
+.describe{position:relative;}
+.face_main{position:absolute; bottom:15%; width:100%; text-align:left;}
+.play{background-image:url('../images/index_play.png'); height:70px; background-repeat:no-repeat; background-position:50% 50%; background-size:contain; 
+cursor:pointer; position:relative; z-index:2;}
+.display{background-image:url('../images/index_pause.png'); height:70px; background-repeat:no-repeat; background-position:50% 50%; background-size:contain; 
+cursor:pointer; position:relative; z-index:2; display:none;}
+.user_head{height:70px; margin-top:10px;}
+.user_head img{max-height:100%; margin:0px auto;}
+.username{text-align:center; color:#fff; font-size:18px; margin-top:10px; line-height:30px;}
+
+.width{height:100%; position:relative; overflow:hidden;}
+.page-line{opacity: 1; height: 5px; width: 120%; position: absolute; top: 48.5%; background-color:#fff; -webkit-transform-origin: center; left: -10%;}
+.up{background-image:url('../images/line1.png'); background-size:contain; background-position:left 50%; background-repeat:no-repeat;}
+.down{background-image:url('../images/line2.png'); background-size:contain; background-position:left 50%; background-repeat:no-repeat;}
+.date_main{position:absolute; top:50%; left:50%; width:100px; height:100px; margin-top:-50px; margin-left:-50px; text-align:center; padding:10px 0px; line-height:25px;
+  background-color:#fff; border-radius:50%;
+}
+.dayly{color:#333; font-size:16px;}
+.year{color:#A9A9AA; font-size:14px;}
+.day{color:#D7DF23; font-size:30px;}
+.img_warpper{text-align:center;}
+.img_warpper img{max-width:80%; max-height:50%; border:3px solid #fff; position:absolute; z-index:2; display:block; left:50%; top:50%; background-color:#ddd;}
+.clock{width: 50px; height: 50px; border-radius:50%; border: 2px solid #fff; position:absolute; display:none;}
+.clock .minute{
+  transform-origin: 0% 50%;
+  -webkit-transform-origin: 0% 50%;
+  -moz-transform-origin: 0% 50%;
+  -ms-transform-origin: 0% 50%;
+  -o-transform-origin: 0% 50%;
+  opacity: 1; height: 2px; width: 20px; position: absolute; background-color:#fff; margin:22px 0 0 23px; border:0px;
+}
+.clock .hour{
+  transform-origin: 0% 50%;
+  -webkit-transform-origin: 0% 50%;
+  -moz-transform-origin: 0% 50%;
+  -ms-transform-origin: 0% 50%;
+  -o-transform-origin: 0% 50%;
+  opacity: 1; height: 2px; width: 15px; position: absolute; background-color:#fff; margin: 22px 0 0 23px; border:0px;
+}
+.clock_left{top:50%; margin-top:-25px; left:20px;}
+.clock_top{left: 50%; margin-left:-25px; top:20px;}
+.end{position:relative; background-image:none;}
+.end_main{ width:100%; height:120px; position:absolute; font-size:20px; color:#fff; line-height:30px; left:0; top:30%;}
+.the_end{color:#b1d036; font-size:32px; height:60px; line-height:80px; margin-bottom:10px;}
+.end_line{height:10px; margin-top:10px;}
+.line_center{width:60%; height:4px; margin:3px auto; background-image:url('../images/fengexian.png'); background-position:50% 50%; background-repeat:no-repeat; background-size:contain;}
+.download{width:220px; height:120px; background-color:#000; border-radius:10px; margin-top:50px; padding:15px; position:absolute; bottom:6%; left:50%; margin-left:-110px;}
+.download_left{width:60%; height:100%; float:left; background-image:url('../images/fengexian.png'); background-position:50% 50%; background-repeat:no-repeat; background-size:contain;}
+.download_right{width:35%; height:100%; float:right; background-image:url('../images/code.png'); background-position:50% 50%; background-repeat:no-repeat; background-size:contain;}
+.mobile{height:40px; width:100%; display:block;background-position:50% 50%; background-repeat:no-repeat; background-size:contain;}
+.ios{ background-image:url('../images/ios.png'); }
+.android{background-image:url('../images/android.png');}
+.weixin{height:40px; width:100%; display:block;background-position:50% 50%; background-repeat:no-repeat; background-size:contain;background-image:url('../images/weixin.png');}
+.mobile_down{height:40px;}
+.weixin_war{height:40px; margin-top:10px;}
+.opacity{width:100%; height:100%; background:#000; opacity:0.3; position:absolute; top:0; left:0; z-index:1;}
+.swipe {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > div {
+  float:left;
+  width:100%;
+  position: relative;
+}
+.page_code{width:100%; height:20px; position:fixed; bottom:10px; line-height:20px; color:#fff; left:0; z-index:3; text-align:center;}
+.img_describe{color:#fff; font-size:14px; line-height:18px; width:100%; height:auto; position:absolute; left:0; text-align:left; float:left; display:none;}
+.preview{width:100%; height:100%; position:fixed; left:0; top:0; z-index:5;}
+.preview img{max-width:100%;max-height:100%; min-width:100px; min-height:50px; position:absolute; z-index:5; display:block; float:left;}
+.preview .opacity{opacity:0.9;}
+
+.conduct{background-position:center top; background-repeat:no-repeat; background-size:cover; position:relative;}
+.banner{width:100%; height:80px; background-position:center top; background-repeat:no-repeat;
+ background-size:cover; position:absolute; left:0; bottom:0;}
+.banner a{width:100%; height:100%; display:block;}
+.timeday,.timemonth{display:block; width:50%; height:50px;}
+.timeday{float:left; text-align:right; padding-right:3px; font-size:48px; margin-top:10px;}
+.timemonth{ float:right; text-align:left; padding-left:3px; font-size:18px;}
+
+.like_discuss{height:50px; width:100%; position:absolute; bottom:0; left:0;}
+.like_discuss span{width:50%; height:100%; display:block; float:left; font-size:16px; line-height:50px; text-align:center;}
