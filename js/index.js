@@ -40,7 +40,8 @@ $.extend(PictureView,{
         autoplaySpeed: timer,
         infinite: false,
         arrows: false,
-        mobileFirst: true
+        mobileFirst: true,
+        draggable: true
       });   
       PictureView.initEvent(); 
     },500);
@@ -78,8 +79,12 @@ $.extend(PictureView,{
     $('#page_bg').css('background-image','url("' + this.data.background  + '")');
     $(".face").css('background-image','url("' + this.data.face +'")');
     $(".face_name").html(this.data.title);
-    $(".user_head img").attr("src",this.data.user.logo)
-    $(".username").html(this.data.user.name);
+    if(this.data.user.logo != ""){
+      $(".user_head img").attr("src",this.data.user.logo)
+    };
+    if(this.data.user.name != ""){
+      $(".username").html(this.data.user.name);
+    };
     $('#music').attr('src',this.data.music);
     var fullTime = this.transTime(this.data.start_time);
     // $(".describe").html(fullTime.getFullYear()+"."+(fullTime.getMonth()+1)+"."+fullTime.getDate()+"&nbsp;&nbsp;&nbsp;&nbsp;"+this.data.day_count+"天");
@@ -255,11 +260,19 @@ $.extend(PictureView,{
 
   },
   transPageCode : function(index){
+    if($(".item").eq(index).find('.face_main').length != 0){
+      $(".stop_play,.auto_play").addClass('hide');
+    }
     if($(".item").eq(index).find(".preview_img").length == 0){
       $(".page_code").hide();
     }else{
       var thisImgIndex = $(".item:lt("+index+")").find(".preview_img").length+1;
       $(".page_code").show().html(thisImgIndex+"/"+this.data.image_count);
+    }
+    if($(".item").eq(index).find(".banner").length == 0){
+      $(".page_code").css('bottom',10)
+    }else{
+      $(".page_code").css('bottom',$(".banner").find("img").height() + 10)
     }
   },
 
@@ -325,17 +338,6 @@ $.extend(PictureView,{
       }
     });
     
-    
-    $("#download_app").bind("click",function(){
-      switch(PictureView.getMobileOperatingSystem()){
-        case "ios":
-          alert("ios");break;
-        case "android":
-          alert("android");break;
-        default:
-          alert("pc");
-      }
-    });
     $(".preview_img").bind("click",function(){
       if(!PictureView.isShowingSingle){
         document.getElementById("music").pause();
@@ -399,17 +401,22 @@ $.extend(PictureView,{
       document.getElementById("music").play();
     });
     
+    $(document).delegate(".close_banner","click",function(){
+      $(this).parent(".banner").remove();
+      $(".page_code").css('bottom',10)
+    });
+    
     if(this.data.banner_info.image == ""){
       $('.banner').hide();
     }else{
-      $(".img_warpper").last().append('<div class="banner"><a href="#" target="_blank"></a></div>')
-      $('.banner').css('background-image','url("' + this.data.banner_info.image  + '")');
+      $(".img_warpper").last().append('<div class="banner"><span class="close_banner"></span><a href="#" target="_blank"><img src="' + "http://e-traveltech.com" + this.data.banner_info.image + '" /></a></div>')
+      // $('.banner').css('background-image','url("' + "http://e-traveltech.com" + this.data.banner_info.image  + '")');
     }
     
     if(this.data.banner_info.url == ""){
-      $('.banner a').attr('href','');
+      $('.banner a').attr('href','#');
     }else{
-      $('.banner a').attr('href',this.data.banner_info.url);
+      $('.banner a').attr('href','http://e-traveltech.com' + this.data.banner_info.url);
     }
   },
   getQueryString : function(name){ 
