@@ -8,12 +8,12 @@ PICTURE_VIEW_CONSTANTS.IMG_ITEM_HTML = '<div class="img_warpper width item">'+
                                           '<p class="img_describe" style="color:{8}">{4}</p>'+
                                         '</div>';
 PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML = '<div class="img_warpper width item">'+
-                                          '<div class="clock {0}">'+
-                                            '<hr class="minute" data-minute="{1}">'+
-                                            '<hr class="hour" data-hour="{2}">'+
+                                          '<div class="clock {0}" style="background-image:url({1}); border-color:{13}">'+
+                                            '<hr class="minute" data-minute="{2}">'+
+                                            '<hr class="hour" data-hour="{3}">'+
                                           '</div>'+
-                                          '<img src="" data-src="{3}" data-width="{4}" date-height="{5}" id="image_{6}" width="{8}" height="{9}" class="preview_img" style="background-color:transparent; background-image:url({10});">'+
-                                          '<div class="img_describe" style="color:{11}">{7}</div>'+
+                                          '<img src="" data-src="{4}" data-width="{5}" date-height="{6}" id="image_{7}" width="{9}" height="{10}" class="preview_img" style="background-color:transparent; background-image:url({11});">'+
+                                          '<div class="img_describe" style="color:{12}">{8}</div>'+
                                       '</div>';
 
 PICTURE_VIEW_CONSTANTS.DATE_ITEM_HTML = '<div class="img_date width item">'+
@@ -80,7 +80,7 @@ $.extend(PictureView,{
       $('#page_bg').css('background-image','url("' + this.data.template.background.album_bg  + '")');
       $(".face").css('background-image','url("' + this.data.template.background.album_bg +'")');
       $(".play").css('background-image','url("' + this.data.template.face.face_play_icon +'")');
-      $(".face_name,.describe,.username,.end_describe").css('color',this.data.template.normal.font_color);
+      $(".face_name,.describe,.username,.end_describe,.page_code").css('color',this.data.template.normal.font_color);
     }else{
       $('#page_bg').css('background-image','url("' + this.data.background  + '")');
       $(".face").css('background-image','url("' + this.data.face +'")');
@@ -117,6 +117,8 @@ $.extend(PictureView,{
     var img_describe = "";
     var datebg = "";
     var databgColor = "";
+    var clockbg = ""
+    var clockbordercolor = "";
     if(PictureView.data.template.length != 0){
       datebg = PictureView.data.template.group.group_bg;
       databgColor = "transparent";
@@ -126,10 +128,20 @@ $.extend(PictureView,{
       }else{
         imgbgimg = "";
       }
+      
+      if(PictureView.data.template.background.clock != ''){
+        clockbg = PictureView.data.template.background.clock.clock_bg;
+        clockbordercolor = "transparent";
+      }else{
+        clockbg = ""
+        clockbordercolor = "#fff";
+      }
+      
     }else{
       imgbg = "";
       datebg = "";
       databgColor = "#fff";
+      clockbg = "";
     }
     for(var i = 0; i < images.length; i++){
       var dayImage = images[i];
@@ -157,6 +169,7 @@ $.extend(PictureView,{
               
               html += PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML.format(
                 "clock_top",
+                clockbg,
                 PictureView.transTime(img.time).getMinutes(),
                 PictureView.transTime(img.time).getHours(),
                 img.url,
@@ -167,7 +180,8 @@ $.extend(PictureView,{
                 imgWidth,
                 imgHeight,
                 imgbgimg,
-                img_describe
+                img_describe,
+                clockbordercolor
                 // imgbgcolor,
                 // imgbgpadding
               );
@@ -183,6 +197,7 @@ $.extend(PictureView,{
               }
               html += PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML.format(
                 "clock_left",
+                clockbg,
                 PictureView.transTime(img.time).getMinutes(),
                 PictureView.transTime(img.time).getHours(),
                 img.url,
@@ -193,7 +208,8 @@ $.extend(PictureView,{
                 imgWidth,
                 imgHeight,
                 imgbgimg,
-                img_describe
+                img_describe,
+                clockbordercolor
                 // imgbgcolor,
                 // imgbgpadding
               );
