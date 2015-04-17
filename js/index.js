@@ -4,23 +4,23 @@ var timer = 3000;
 PICTURE_VIEW_CONSTANTS.HOUR_ANGLE = 30;
 PICTURE_VIEW_CONSTANTS.MINUTE_ANGLE = 6;
 PICTURE_VIEW_CONSTANTS.IMG_ITEM_HTML = '<div class="img_warpper width item">'+
-                                          '<img src="" data-src="{0}" data-width="{1}" date-height="{2}" id="image_{3}" width="{5}" height="{6}" class="preview_img">'+
-                                          '<p class="img_describe">{4}</p>'+
+                                          '<img src="" data-src="{0}" data-width="{1}" date-height="{2}" id="image_{3}" width="{5}" height="{6}" class="preview_img" style="background-color:transparent; background-image:url({7});">'+
+                                          '<p class="img_describe" style="color:{8}">{4}</p>'+
                                         '</div>';
 PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML = '<div class="img_warpper width item">'+
                                           '<div class="clock {0}">'+
                                             '<hr class="minute" data-minute="{1}">'+
                                             '<hr class="hour" data-hour="{2}">'+
                                           '</div>'+
-                                          '<img src="" data-src="{3}" data-width="{4}" date-height="{5}" id="image_{6}" width="{8}" height="{9}" class="preview_img">'+
-                                          '<div class="img_describe">{7}</div>'+
+                                          '<img src="" data-src="{3}" data-width="{4}" date-height="{5}" id="image_{6}" width="{8}" height="{9}" class="preview_img" style="background-color:transparent; background-image:url({10});">'+
+                                          '<div class="img_describe" style="color:{11}">{7}</div>'+
                                       '</div>';
 
 PICTURE_VIEW_CONSTANTS.DATE_ITEM_HTML = '<div class="img_date width item">'+
-                                          '<div class="date_main">'+
-                                            '<p class="dayly">{0}</p>'+
-                                            '<p class="year">{1}</p>'+
-                                            '<p class="day">{2}</p>'+
+                                          '<div class="date_main" style="background-color:{0}; background-image:url({1});">'+
+                                            '<p class="dayly">{2}</p>'+
+                                            '<p class="year">{3}</p>'+
+                                            '<p class="day">{4}</p>'+
                                           '</div>'+
                                         '</div>';
 
@@ -49,8 +49,8 @@ $.extend(PictureView,{
   getData : function(){
     //js获取参数travel_id！！
     $.ajax({
-      url: 'http://e-traveltech.com/travelNotes/index/getTravelNotes',
-      // url: 'http://121.40.167.145/travelNotes/index/getTravelNotes',
+      // url: 'http://e-traveltech.com/travelNotes/index/getTravelNotes',
+      url: 'http://121.40.167.145/travelNotes/index/getTravelNotes',
       data:{
         travel_id : this.getQueryString("travel_id"),
         channel_id : this.getQueryString("channel_id"),
@@ -76,12 +76,21 @@ $.extend(PictureView,{
     });
   },
   fillData : function(){
-    $('#page_bg').css('background-image','url("' + this.data.background  + '")');
-    $(".face").css('background-image','url("' + this.data.face +'")');
+    if(this.data.template.length != 0){
+      $('#page_bg').css('background-image','url("' + this.data.template.background.album_bg  + '")');
+      $(".face").css('background-image','url("' + this.data.template.background.album_bg +'")');
+      $(".play").css('background-image','url("' + this.data.template.face.face_play_icon +'")');
+      $(".face_name,.describe,.username,.end_describe").css('color',this.data.template.normal.font_color);
+    }else{
+      $('#page_bg').css('background-image','url("' + this.data.background  + '")');
+      $(".face").css('background-image','url("' + this.data.face +'")');
+    }
     $(".face_name").html(this.data.title);
     if(this.data.user.logo != ""){
       $(".user_head img").attr("src",this.data.user.logo)
-    };
+    }else{
+      $(".user_head img").attr("src","images/default_logo.png")
+    }
     if(this.data.user.name != ""){
       $(".username").html(this.data.user.name);
     };
@@ -104,9 +113,29 @@ $.extend(PictureView,{
     var html = "";
     var images = PictureView.data.images;
     var num = 0
+    var imgbgimg = "";
+    var img_describe = "";
+    var datebg = "";
+    var databgColor = "";
+    if(PictureView.data.template.length != 0){
+      datebg = PictureView.data.template.group.group_bg;
+      databgColor = "transparent";
+      if(PictureView.data.template.photo_bg != ''){
+        imgbgimg = PictureView.data.template.background.photo_bg;
+        img_describe = PictureView.data.template.normal.font_color;
+      }else{
+        imgbgimg = "";
+      }
+    }else{
+      imgbg = "";
+      datebg = "";
+      databgColor = "#fff";
+    }
     for(var i = 0; i < images.length; i++){
       var dayImage = images[i];
       html += PICTURE_VIEW_CONSTANTS.DATE_ITEM_HTML.format(
+        databgColor,
+        datebg,
         "DAY"+(i+1), 
         PictureView.transTime(dayImage.time).getFullYear()+"."+(PictureView.transTime(dayImage.time).getMonth()+1), 
         PictureView.transTime(dayImage.time).getDate());
@@ -136,7 +165,11 @@ $.extend(PictureView,{
                 num,
                 img.content,
                 imgWidth,
-                imgHeight
+                imgHeight,
+                imgbgimg,
+                img_describe
+                // imgbgcolor,
+                // imgbgpadding
               );
             }else{
               var imgWidth;
@@ -158,7 +191,11 @@ $.extend(PictureView,{
                 num,
                 img.content,
                 imgWidth,
-                imgHeight
+                imgHeight,
+                imgbgimg,
+                img_describe
+                // imgbgcolor,
+                // imgbgpadding
               );
             }
           }else{
@@ -178,7 +215,11 @@ $.extend(PictureView,{
               num, 
               img.content, 
               imgWidth, 
-              imgHeight
+              imgHeight,
+              imgbgimg,
+              img_describe
+              // imgbgcolor,
+              // imgbgpadding
             );
           }
           num ++;
