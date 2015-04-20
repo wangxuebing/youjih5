@@ -3,11 +3,11 @@ var PICTURE_VIEW_CONSTANTS = {};
 var timer = 3000;
 PICTURE_VIEW_CONSTANTS.HOUR_ANGLE = 30;
 PICTURE_VIEW_CONSTANTS.MINUTE_ANGLE = 6;
-PICTURE_VIEW_CONSTANTS.IMG_ITEM_HTML = '<div class="img_warpper width item">'+
+PICTURE_VIEW_CONSTANTS.IMG_ITEM_HTML = '<div class="img_warpper width item {9}">'+
                                           '<img src="" data-src="{0}" data-width="{1}" date-height="{2}" id="image_{3}" width="{5}" height="{6}" class="preview_img" style="background-color:transparent; background-image:url({7});">'+
                                           '<p class="img_describe" style="color:{8}">{4}</p>'+
                                         '</div>';
-PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML = '<div class="img_warpper width item">'+
+PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML = '<div class="img_warpper width item {14}">'+
                                           '<div class="clock {0}" style="background-image:url({1}); border-color:{13}">'+
                                             '<hr class="minute" data-minute="{2}">'+
                                             '<hr class="hour" data-hour="{3}">'+
@@ -16,11 +16,11 @@ PICTURE_VIEW_CONSTANTS.IMG_COLCK_ITEM_HTML = '<div class="img_warpper width item
                                           '<div class="img_describe" style="color:{12}">{8}</div>'+
                                       '</div>';
 
-PICTURE_VIEW_CONSTANTS.DATE_ITEM_HTML = '<div class="img_date width item">'+
-                                          '<div class="date_main" style="background-color:{0}; background-image:url({1});">'+
-                                            '<p class="dayly">{2}</p>'+
-                                            '<p class="year">{3}</p>'+
-                                            '<p class="day">{4}</p>'+
+PICTURE_VIEW_CONSTANTS.DATE_ITEM_HTML = '<div class="img_date width item {0}">'+
+                                          '<div class="date_main" style="background-color:{1}; background-image:url({2});">'+
+                                            '<p class="dayly">{3}</p>'+
+                                            '<p class="year">{4}</p>'+
+                                            '<p class="day">{5}</p>'+
                                           '</div>'+
                                         '</div>';
 
@@ -78,13 +78,13 @@ $.extend(PictureView,{
   fillData : function(){
     if(this.data.template.length != 0){
       $('#page_bg').css('background-image','url("' + this.data.template.background.album_bg  + '")');
-      $(".face").css('background-image','url("' + this.data.template.background.album_bg +'")');
       $(".play").css('background-image','url("' + this.data.template.face.face_play_icon +'")');
-      $(".face_name,.describe,.username,.end_describe,.page_code").css('color',this.data.template.normal.font_color);
+      $(".face_name,.describe,.username,.end_describe,.page_code,.download_intro").css('color',this.data.template.normal.font_color);
+      $(".face_main").css('background-image','url("' + this.data.template.face.face_cover_bg +'")');
     }else{
       $('#page_bg').css('background-image','url("' + this.data.background  + '")');
-      $(".face").css('background-image','url("' + this.data.face +'")');
     }
+    $(".face").css('background-image','url("' + this.data.face +'")');
     $(".face_name").html(this.data.title);
     if(this.data.user.logo != ""){
       $(".user_head img").attr("src",this.data.user.logo)
@@ -92,7 +92,7 @@ $.extend(PictureView,{
       $(".user_head img").attr("src","images/default_logo.png")
     }
     if(this.data.user.name != ""){
-      $(".username").html(this.data.user.name);
+      $(".username").html("导演：" + this.data.user.name);
     };
     $('#music').attr('src',this.data.music);
     var fullTime = this.transTime(this.data.start_time);
@@ -119,9 +119,11 @@ $.extend(PictureView,{
     var databgColor = "";
     var clockbg = ""
     var clockbordercolor = "";
+    var model = "";
     if(PictureView.data.template.length != 0){
       datebg = PictureView.data.template.group.group_bg;
       databgColor = "transparent";
+      model = "ismodel";
       if(PictureView.data.template.photo_bg != ''){
         imgbgimg = PictureView.data.template.background.photo_bg;
         img_describe = PictureView.data.template.normal.font_color;
@@ -136,16 +138,17 @@ $.extend(PictureView,{
         clockbg = ""
         clockbordercolor = "#fff";
       }
-      
     }else{
       imgbg = "";
       datebg = "";
       databgColor = "#fff";
       clockbg = "";
+      model = "isntmodel";
     }
     for(var i = 0; i < images.length; i++){
       var dayImage = images[i];
       html += PICTURE_VIEW_CONSTANTS.DATE_ITEM_HTML.format(
+        model,
         databgColor,
         datebg,
         "DAY"+(i+1), 
@@ -181,7 +184,8 @@ $.extend(PictureView,{
                 imgHeight,
                 imgbgimg,
                 img_describe,
-                clockbordercolor
+                clockbordercolor,
+                model
                 // imgbgcolor,
                 // imgbgpadding
               );
@@ -209,7 +213,8 @@ $.extend(PictureView,{
                 imgHeight,
                 imgbgimg,
                 img_describe,
-                clockbordercolor
+                clockbordercolor,
+                model
                 // imgbgcolor,
                 // imgbgpadding
               );
@@ -233,7 +238,8 @@ $.extend(PictureView,{
               imgWidth, 
               imgHeight,
               imgbgimg,
-              img_describe
+              img_describe,
+              model
               // imgbgcolor,
               // imgbgpadding
             );
@@ -246,8 +252,9 @@ $.extend(PictureView,{
   },
   initCss : function(){
     //页面斜线
-    $("#picture_view").find(".width:odd").addClass('down');
-    $("#picture_view").find(".width:even").addClass('up');
+    $("#picture_view").find(".width.isntmodel:odd").addClass('down');
+    $("#picture_view").find(".width.isntmodel:even").addClass('up');
+
     switch(PictureView.getMobileOperatingSystem()){
       case "ios":
         $("#mobile").addClass("ios");break;

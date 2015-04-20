@@ -74,13 +74,16 @@ background-position:50% 50%; background-color:transparent; z-index:2; border:0; 
   border-top:1px solid #fff; border-bottom:1px solid #fff; width:60%; margin:0px auto; color:#fff; 
   line-height:40px; font-size:16px; text-align:center; margin-top:10px; opacity:0.5;
 }
-.face_name{font-size:24px;}
+.face_name{font-size:24px; margin-top:50px;}
 .describe{position:relative;}
-.face_main{position:absolute; bottom:15%; width:100%; text-align:left;}
-.play{background-image:url('../images/index_play.png'); height:70px; background-repeat:no-repeat; background-position:50% 50%; background-size:contain; 
-cursor:pointer; position:relative; z-index:2;}
-.display{background-image:url('../images/index_pause.png'); height:70px; background-repeat:no-repeat; background-position:50% 50%; background-size:contain; 
-cursor:pointer; position:relative; z-index:2;}
+.face_main{
+  position:absolute; bottom:0; width:100%; height:60%; text-align:left;
+  background-position:50% top; background-size:cover; background-repeat:no-repeat;
+}
+.play,.display{ width:100%; height:70px; background-repeat:no-repeat; background-position:50% 50%; background-size:contain; 
+cursor:pointer; position:absolute; z-index:2; top:-30px; left:0;}
+.play{background-image:url('../images/index_play.png');}
+.display{background-image:url('../images/index_pause.png');}
 .user_head{height:70px; margin-top:10px; text-align:center;}
 .user_head img{max-height:100%; margin:0px auto; border-radius:50%; border:1px solid #7f878e; border-color:rgba(127,135,142,0.3);}
 .username{text-align:center; color:#fff; font-size:18px; margin-top:10px; line-height:30px; font-weight:bold;}
@@ -90,12 +93,12 @@ cursor:pointer; position:relative; z-index:2;}
 .up{background-image:url('../images/line1.png'); background-size:contain; background-position:left 50%; background-repeat:no-repeat;}
 .down{background-image:url('../images/line2.png'); background-size:contain; background-position:left 50%; background-repeat:no-repeat;}
 .date_main{
-  position:absolute; top:50%; left:50%; width:150px; height:150px; margin-top:-75px; margin-left:-75px; text-align:center; line-height:25px;
-  background-color:#fff; border-radius:50%; background-position:50% 50%; background-repeat:no-repeat; background-size:contain;
+  position:absolute; top:50%; left:50%; width:120px; height:120px; margin-top:-60px; margin-left:-60px; text-align:center; line-height:23px;
+  background-color:#fff; border-radius:50%; background-position:50% 50%; background-repeat:no-repeat; background-size:120px 120px; padding-top:27px;
 }
 .dayly{color:#333; font-size:16px;}
 .year{color:#A9A9AA; font-size:14px;}
-.day{color:#D7DF23; font-size:30px;}
+.day{color:#D7DF23; font-size:24px;}
 .img_warpper{text-align:center;}
 
 .img_warpper .preview_img{
@@ -134,7 +137,7 @@ cursor:pointer; position:relative; z-index:2;}
 .ios{ background-image:url('../images/ios_download.png'); }
 .android{background-image:url('../images/android_download.png');}
 .weixin{height:40px; width:100%; display:block;background-position:50% 50%; background-repeat:no-repeat; background-size:contain;background-image:url('../images/weixin.png');}
-.mobile_down{height:50px; background-color:#b1d036; border-radius:5px; padding:8px 0px; margin-top:15px; text-align:center;}
+.mobile_down{height:50px; background-color:#b1d036; border-radius:5px; padding:8px 0px; margin-top:5px; text-align:center;}
 .mobile{height:34px; width:80%; display:block; margin:0px auto; background-position:50% 50%; background-repeat:no-repeat; background-size:contain;}
 .weixin_war{height:40px; margin-top:10px;}
 .opacity{width:100%; height:100%; background:#000; opacity:0.3; position:absolute; top:0; left:0; z-index:1;}
